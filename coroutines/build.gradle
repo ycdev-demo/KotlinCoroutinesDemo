@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: "${androidModuleCommon}"
+apply from: '../build_common.gradle'
+
+android {
+    defaultConfig {
+        minSdkVersion versions.minSdk
+    }
+
+    lintOptions {
+        textReport true
+        textOutput 'stdout'
+    }
+}
+
+dependencies {
+    implementation deps.kotlin.stdlib
+    implementation deps.kotlin.coroutinesCore
+    implementation deps.kotlin.coroutinesAndroid
+
+    implementation deps.androidx.coreKtx
+    implementation deps.androidx.material
+    implementation deps.androidx.constraintLayout
+    implementation deps.androidx.recyclerview
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    implementation deps.lifecycle.viewModelKtx
+    implementation deps.lifecycle.liveDataKtx
+    implementation deps.gson
+    implementation deps.timber
+
+    // Dependencies for local unit tests
+    testImplementation deps.test.core
+    testImplementation deps.test.junit
+    testImplementation deps.test.truth
+    testImplementation deps.test.mockk
+
+    // Android Testing Support Library's runner and rules
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.rules
+}

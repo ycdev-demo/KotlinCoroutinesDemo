@@ -1,0 +1,40 @@
+buildscript {
+    ext {
+        androidProjectCommon = "${rootDir}/android_project_common.gradle"
+        androidModuleCommon = "${rootDir}/android_module_common.gradle"
+    }
+    apply from: "${androidProjectCommon}"
+
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.0.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
+    }
+}
+
+// Add plugin for 'spotless'
+plugins {
+    id "com.diffplug.gradle.spotless" version "3.27.1"
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+spotless {
+    kotlin {
+        target "**/*.kt"
+        ktlint(versions.ktlint)
+    }
+}
+
+ext {
+    versions.ndkVersion = "21.0.6113669"
+}
